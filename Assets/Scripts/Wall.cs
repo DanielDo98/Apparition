@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour {
 
-	public enum WallState{OPEN, CLOSED};
+	public enum WallState{OPEN_PASSABLE, OPEN, CLOSED};
 
 	public WallState wallState;
 	public Wall[] triggers; //TODO add more triggers.
 	private bool triggered = false; //TODO more customizable triggers
 
 	public Material openMat;
+	public Material transparentOpen;
 	public Material closedMat;
 
 	// Use this for initialization
@@ -23,12 +24,17 @@ public class Wall : MonoBehaviour {
 		}
 	}
 
-	private void setOpen() {
+	public void setOpenPassable() {
+		gameObject.tag = "OpenPassable";
+		GetComponent<Renderer> ().material = transparentOpen;
+	}
+
+	public void setOpen() {
 		gameObject.tag = "Open";
 		GetComponent<Renderer> ().material = openMat;
 	}
 
-	private void setClosed() {
+	public void setClosed() {
 		gameObject.tag = "Closed";
 		GetComponent<Renderer> ().material = closedMat;
 	}
